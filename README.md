@@ -59,7 +59,6 @@ Python, pandas, scikit-learn, Azure Machine Learning (AutoML, Managed Online End
 ```
 notebooks/  Jupyter notebooks used in Azure ML Studio (data collection → feature engineering → training → deployment)
 app/ Streamlit frontend, Dockerfile, and dependencies
-screenshots/ Screenshots from Azure ML Studio (AutoML leaderboard, endpoint, etc.)
 ```
 
 ## Running the app locally
