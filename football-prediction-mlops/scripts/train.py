@@ -12,6 +12,7 @@ def main():
     parser.add_argument("--data_path", type=str, required=True)
     parser.add_argument("--output_dir", type=str, required=True)
     parser.add_argument("--baseline_accuracy", type=float, default=0.50)
+    
     args = parser.parse_args()
 
     mlflow.autolog()
