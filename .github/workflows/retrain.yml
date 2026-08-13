@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'scripts/train.py'
-      - 'app/premier_league_features.csv'
+      - 'football-prediction-mlops/scripts/train.py'
+      - 'football-prediction-mlops/app/premier_league_features.csv'
     workflow_dispatch:
 
 jobs:
