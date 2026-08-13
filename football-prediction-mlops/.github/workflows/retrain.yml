@@ -1,0 +1,34 @@
+name: Retrain and Validate Football Model
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/train.py'
+      - 'app/premier_league_features.csv'
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Azure ML CLI extension
+        run: az extension add -n ml -y
+
+      - name: Submit training job to Azure ML
+        run: |
+          az ml job create \
+            --file scripts/job.yml \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --workspace-name ${{ secrets.AZURE_WORKSPACE_NAME }} \
+            --set display_name="github-actions-retrain-${{ github.run_number }}" \
+            --stream

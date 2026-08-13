@@ -1,0 +1,25 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+
+code: ../scripts
+
+command: >-
+  python train.py
+  --data_path ${{inputs.training_data}}
+  --output_dir ${{outputs.model_output}}
+  --baseline_accuracy 0.43
+
+inputs:
+  training_data:
+    type: uri_file
+    path: azureml:premier-league-features:1
+
+outputs:
+  model_output:
+    type: uri_folder
+
+environment: azureml://registries/azureml/environments/sklearn-1.5/labels/latest
+
+compute: azureml:molnarbotondkristof1
+
+display_name: football-model-retrain
+experiment_name: football-prediction-cicd
