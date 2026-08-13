@@ -19,7 +19,7 @@ outputs:
 
 environment: azureml://registries/azureml/environments/sklearn-1.5/labels/latest
 
-compute: azureml:molnarbotondkristof1
+compute: azureml:cicd-cluster
 
 display_name: football-model-retrain
 experiment_name: football-prediction-cicd
