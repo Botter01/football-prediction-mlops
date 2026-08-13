@@ -28,7 +28,7 @@ jobs:
       - name: Submit training job to Azure ML
         run: |
           az ml job create \
-            --file 'football-prediction-mlops/scripts/job.yml \
+            --file football-prediction-mlops/scripts/job.yml \
             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
             --workspace-name ${{ secrets.AZURE_WORKSPACE_NAME }} \
             --set display_name="github-actions-retrain-${{ github.run_number }}" \
