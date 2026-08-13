@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 
-code: football-prediction-mlops/scripts
+code: .
 
 command: >-
   python train.py
