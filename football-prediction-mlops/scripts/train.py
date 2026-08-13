@@ -1,8 +1,6 @@
 import argparse
 import pandas as pd
 import mlflow
-from azure.ai.ml import MLClient, Input
-from azure.identity import DefaultAzureCredential
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import joblib
