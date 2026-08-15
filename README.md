@@ -93,12 +93,12 @@ Python, pandas, scikit-learn, Azure Machine Learning (AutoML, Managed Online End
 ## Repository structure
 
 ```
-notebooks/       Jupyter notebooks used in Azure ML Studio (data collection → feature engineering → training → deployment)
-app/              Streamlit frontend, Dockerfile, and dependencies
-scripts/          Standalone training script (train.py) and Azure ML job definition (job.yml) used by the CI/CD pipeline
-monitoring/       Drift detection script, Docker Compose (PostgreSQL + Grafana)
+football-prediction-mlops/notebooks/       Jupyter notebooks used in Azure ML Studio (data collection → feature engineering → training → deployment)
+football-prediction-mlops/app/              Streamlit frontend, Dockerfile, and dependencies
+football-prediction-mlops/scripts/          Standalone training script (train.py) and Azure ML job definition (job.yml) used by the CI/CD pipeline
+football-prediction-mlops/monitoring/       Drift detection script, Docker Compose (PostgreSQL + Grafana)
 .github/workflows/ GitHub Actions workflow that triggers retraining
-docs/             Screenshots from Azure ML Studio (AutoML leaderboard, endpoint, CI/CD runs, Grafana dashboard, etc.)
+football-prediction-mlops/screenshots/             Screenshots from Azure ML Studio (AutoML leaderboard, endpoint, CI/CD runs, Grafana dashboard, etc.)
 ```
 
 ## Running the app locally
