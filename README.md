@@ -27,14 +27,14 @@ Docker container  ──────────►  Azure Container Registry  �
 
 
         ┌─────────────────────────────────────────────────────┐
-        │              After deployment                         │
+        │              After deployment                       │
         └─────────────────────────────────────────────────────┘
 
 GitHub push (code or data change)
         │
         ▼
 GitHub Actions ──► Azure ML retraining job ──► validation gate vs. baseline accuracy
-        │                                              │
+        │                                               │
         │                                    fails ─────┴───── passes
         │                                      │                │
         │                                 job fails,       registered as new
