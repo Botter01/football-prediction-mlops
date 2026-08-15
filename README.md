@@ -64,12 +64,14 @@ Simulated traffic → Evidently drift analysis → PostgreSQL → Grafana dashbo
 - If the new model matches or beats the baseline, it's saved and ready to be promoted to the Model Registry
 - Authentication from GitHub Actions to Azure runs through a scoped Service Principal (least-privilege, limited to the project's resource group) rather than a personal login, and compute runs on an auto-scaling Azure ML **Compute Cluster** (not a personal Compute Instance)  this distinction matters because Compute Instances are tied to an individual user and can't be triggered by an automated identity
 - Verified both directions of the gate in practice: a model trained with default hyperparameters that scored below baseline was correctly rejected (job failed as designed), and after adjusting the baseline threshold to reflect a realistic target, an equivalent model passed and completed successfully
+![CI/CD gated automatic retraining runs](football-prediction-mlops/screenshots/ci_cd.png)
 
 ### Monitoring: input drift detection
 - Since there's no real production traffic hitting this model, the monitoring setup uses two simulated traffic sets: one resampled directly from the training data (should show *no* drift), and one with specific features (`home_form`, `away_form`, `home_goal_diff_trend`) deliberately shifted (should show drift *only* in those features)
 - **Evidently** computes per-feature drift scores (Wasserstein distance) between each simulated batch and the original training distribution
 - Results are written to **PostgreSQL** (running in Docker) with a timestamp per check, and visualized in a **Grafana** dashboard (also Docker) showing drift score per feature over time, with a threshold line marking the drift cutoff
 - Confirmed the mechanism works both ways: the "normal" batch showed no dataset-level drift, and the "shifted" batch correctly flagged exactly the three deliberately-shifted features, leaving the untouched ones below threshold
+![Grafana drift monitoring dashboard](football-prediction-mlops/screenshots/grafana.png)
 
 **Important scoping note:** the monitoring pipeline currently runs on manual invocation (each point on the dashboard corresponds to a test run I triggered by hand), not a scheduled job  in a real deployment this script would run on a schedule (e.g. daily via cron or Task Scheduler). It's also intentionally **not** wired into the CI/CD pipeline: a drift alert here is a signal for human review, not an automatic retraining trigger, since a shift in input distribution doesn't necessarily mean the model's predictions have gotten worse  that can only be confirmed against actual match outcomes once they're known.
 
